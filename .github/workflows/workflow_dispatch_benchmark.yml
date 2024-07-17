@@ -33,7 +33,7 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            const versionOutputs = ${{ toJSON(steps.version.outputs.contents) }};
+            const readFile = ${{ toJSON(steps.read_file.outputs.contents) }};
             
-            console.log("versionOutputs");
-            console.log(versionOutputs);
+            console.log("readFile");
+            console.log(readFile);
