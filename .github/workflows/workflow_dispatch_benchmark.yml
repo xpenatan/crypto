@@ -23,7 +23,7 @@ jobs:
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
 
-      - name: Build
+      - name: Run Benchmark
         run: ./gradlew :crypto-perf:jmh
 
       - name: Read file contents
@@ -32,11 +32,9 @@ jobs:
         with:
           path: "crypto-perf/build/jmh/result.txt"
 
-      - name: Print result
+      - name: Print Benchmark results
         uses: actions/github-script@v7
         with:
           script: |
             const readFile = ${{ toJSON(steps.read_file.outputs.contents) }};
-            
-            console.log("readFile");
             console.log(readFile);

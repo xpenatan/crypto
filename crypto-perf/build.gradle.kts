@@ -28,7 +28,7 @@ tasks.register<JavaExec>("jmh") {
     args = mutableListOf(
         "-rf",  "text",
         "-rff",  File(resultFile, "result.txt").path,
-        "-e", "AesBuddy|AesCommons|AesConscrypt|AesJce",
-        "-i", "5"
+//        "-e", "AesBuddy|AesCommons|AesConscrypt|AesJce",
+        "-i", "200"
     )
 }
