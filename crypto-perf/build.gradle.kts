@@ -19,7 +19,7 @@ dependencies {
 }
 
 val resultFile = File(projectDir, "build/jmh/")
-resultFile.mkdir()
+resultFile.mkdirs()
 
 tasks.register<JavaExec>("jmh") {
     dependsOn("classes")
