@@ -11,7 +11,7 @@ import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Warmup;
 
 @Fork(value = 1)
-@Warmup(iterations = 2)
+@Warmup(iterations = 3)
 public class AesJce extends AesBase{
 
     private static byte[] GCM_128_ENCRYPTED;

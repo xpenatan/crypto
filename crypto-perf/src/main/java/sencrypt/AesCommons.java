@@ -17,7 +17,7 @@ import org.openjdk.jmh.annotations.Warmup;
  * We use a separate key for encryption and authentication.
  */
 @Fork(value = 1)
-@Warmup(iterations = 2)
+@Warmup(iterations = 3)
 public class AesCommons extends AesBase{
 
     private static byte[] GCM_128_ENCRYPTED;
