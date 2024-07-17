@@ -10,8 +10,8 @@ import java.security.Security;
 import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Warmup;
 
-@Fork(value = 1, warmups = 1)
-@Warmup(iterations = 5)
+@Fork(value = 1)
+@Warmup(iterations = 2)
 public class AesConscrypt extends AesBase{
 
     static {

@@ -1,4 +1,4 @@
-repositories.mavenCentral()
+import java.util.*
 
 plugins {
     id("java")
@@ -18,8 +18,17 @@ dependencies {
     implementation("org.conscrypt:conscrypt-openjdk-uber:2.1.0")
 }
 
+val resultFile = File(projectDir, "build/jmh/")
+resultFile.mkdir()
+
 tasks.register<JavaExec>("jmh") {
     dependsOn("classes")
     mainClass.set("org.openjdk.jmh.Main")
     classpath = sourceSets["main"].runtimeClasspath
+    args = mutableListOf(
+        "-rf",  "text",
+        "-rff",  File(resultFile, "result.txt").path,
+        "-e", "AesBuddy|AesCommons|AesConscrypt|AesJce",
+        "-i", "5"
+    )
 }

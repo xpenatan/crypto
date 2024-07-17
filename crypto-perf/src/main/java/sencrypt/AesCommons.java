@@ -7,6 +7,8 @@ import org.openjdk.jmh.annotations.Benchmark;
 
 import javax.crypto.SecretKey;
 import java.util.Properties;
+import org.openjdk.jmh.annotations.Fork;
+import org.openjdk.jmh.annotations.Warmup;
 
 /**
  * Bench mark the apache commons crypt library http://commons.apache.org/proper/commons-crypto
@@ -14,6 +16,8 @@ import java.util.Properties;
  * All messages for CBC are CBC+HMAC.
  * We use a separate key for encryption and authentication.
  */
+@Fork(value = 1)
+@Warmup(iterations = 2)
 public class AesCommons extends AesBase{
 
     private static byte[] GCM_128_ENCRYPTED;
@@ -40,41 +44,41 @@ public class AesCommons extends AesBase{
         }
     }
 
-//    @Benchmark
-//    public void enc_aes128CbcHmacSha256() throws Exception {
-//
-//        Properties properties = new Properties();
-//        CryptoCipher encipher = Utils.getCipherInstance(AesUtil.CBC_CYPHER_TRANSFORM, properties);
-//
-//        AesUtil.encryptCBC(encipher, HmacAlgorithms.HMAC_SHA_256, AUTH_DEFAULT_KEY_256, ENC_DEFAULT_KEY_128, AesUtil.CBC_IV_SIZE, AesUtil.plaintext);
-//
-//    }
-//
-//    @Benchmark
-//    public void enc_aes128GCM() throws Exception {
-//        Properties properties = new Properties();
-//        CryptoCipher encipher = Utils.getCipherInstance(AesUtil.GCM_CYPHER_TRANSFORM, properties);
-//
-//        AesUtil.encryptGCM(encipher, ENC_DEFAULT_KEY_128, AesUtil.GCM_IV_SIZE, AesUtil.plaintext);
-//    }
-//
-//    @Benchmark
-//    public void dec_aes128CbcHmacSha256() throws Exception {
-//
-//        Properties properties = new Properties();
-//        CryptoCipher encipher = Utils.getCipherInstance(AesUtil.CBC_CYPHER_TRANSFORM, properties);
-//
-//
-//        AesUtil.decryptCBC(encipher, HmacAlgorithms.HMAC_SHA_256, AUTH_DEFAULT_KEY_256, ENC_DEFAULT_KEY_128, CBC_128_ENCRYPTED);
-//
-//    }
-//
-//    @Benchmark
-//    public void dec_aes128GCM() throws Exception {
-//        Properties properties = new Properties();
-//        CryptoCipher encipher = Utils.getCipherInstance(AesUtil.GCM_CYPHER_TRANSFORM, properties);
-//
-//        AesUtil.decryptGCM(encipher, ENC_DEFAULT_KEY_128, GCM_128_ENCRYPTED);
-//    }
+    @Benchmark
+    public void enc_aes128CbcHmacSha256() throws Exception {
+
+        Properties properties = new Properties();
+        CryptoCipher encipher = Utils.getCipherInstance(AesUtil.CBC_CYPHER_TRANSFORM, properties);
+
+        AesUtil.encryptCBC(encipher, HmacAlgorithms.HMAC_SHA_256, AUTH_DEFAULT_KEY_256, ENC_DEFAULT_KEY_128, AesUtil.CBC_IV_SIZE, AesUtil.plaintext);
+
+    }
+
+    @Benchmark
+    public void enc_aes128GCM() throws Exception {
+        Properties properties = new Properties();
+        CryptoCipher encipher = Utils.getCipherInstance(AesUtil.GCM_CYPHER_TRANSFORM, properties);
+
+        AesUtil.encryptGCM(encipher, ENC_DEFAULT_KEY_128, AesUtil.GCM_IV_SIZE, AesUtil.plaintext);
+    }
+
+    @Benchmark
+    public void dec_aes128CbcHmacSha256() throws Exception {
+
+        Properties properties = new Properties();
+        CryptoCipher encipher = Utils.getCipherInstance(AesUtil.CBC_CYPHER_TRANSFORM, properties);
+
+
+        AesUtil.decryptCBC(encipher, HmacAlgorithms.HMAC_SHA_256, AUTH_DEFAULT_KEY_256, ENC_DEFAULT_KEY_128, CBC_128_ENCRYPTED);
+
+    }
+
+    @Benchmark
+    public void dec_aes128GCM() throws Exception {
+        Properties properties = new Properties();
+        CryptoCipher encipher = Utils.getCipherInstance(AesUtil.GCM_CYPHER_TRANSFORM, properties);
+
+        AesUtil.decryptGCM(encipher, ENC_DEFAULT_KEY_128, GCM_128_ENCRYPTED);
+    }
 
 }

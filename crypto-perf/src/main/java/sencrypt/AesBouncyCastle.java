@@ -7,10 +7,15 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.openjdk.jmh.annotations.Benchmark;
 
 import java.security.Security;
+import org.openjdk.jmh.annotations.Fork;
+import org.openjdk.jmh.annotations.Warmup;
 
 /**
  * Uses the {@link BouncyCastleProvider} to encrypt and decrypt AES CBC and GCM data.
  */
+
+@Fork(value = 1)
+@Warmup(iterations = 2)
 public class AesBouncyCastle extends AesBase{
 
     private static final byte VERSION = (byte) 0;
@@ -33,25 +38,25 @@ public class AesBouncyCastle extends AesBase{
             e.printStackTrace();
         }
     }
-//
-//    @Benchmark
-//    public void enc_aes128CbcHmacSha256() throws Exception {
-//        AES.encryptCBC(VERSION, PROVIDER, ENC_DEFAULT_KEY_128, AesUtil.plaintext);
-//    }
-//
-//    @Benchmark
-//    public void enc_aes128GCM() throws Exception {
-//        AES.encryptGCM(VERSION, PROVIDER, ENC_DEFAULT_KEY_128, AesUtil.plaintext);
-//    }
-//
-//
-//    @Benchmark
-//    public void dec_aes128CbcHmacSha256() throws Exception {
-//        AES.decryptCBC(VERSION, PROVIDER, ENC_DEFAULT_KEY_128, CBC_128_ENCRYPTED);
-//    }
-//
-//    @Benchmark
-//    public void dec_aes128GCM() throws Exception {
-//        AES.decryptGCM(VERSION, PROVIDER, ENC_DEFAULT_KEY_128, GCM_128_ENCRYPTED);
-//    }
+
+    @Benchmark
+    public void enc_aes128CbcHmacSha256() throws Exception {
+        AES.encryptCBC(VERSION, PROVIDER, ENC_DEFAULT_KEY_128, AesUtil.plaintext);
+    }
+
+    @Benchmark
+    public void enc_aes128GCM() throws Exception {
+        AES.encryptGCM(VERSION, PROVIDER, ENC_DEFAULT_KEY_128, AesUtil.plaintext);
+    }
+
+
+    @Benchmark
+    public void dec_aes128CbcHmacSha256() throws Exception {
+        AES.decryptCBC(VERSION, PROVIDER, ENC_DEFAULT_KEY_128, CBC_128_ENCRYPTED);
+    }
+
+    @Benchmark
+    public void dec_aes128GCM() throws Exception {
+        AES.decryptGCM(VERSION, PROVIDER, ENC_DEFAULT_KEY_128, GCM_128_ENCRYPTED);
+    }
 }
